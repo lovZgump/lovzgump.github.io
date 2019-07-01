@@ -1,0 +1,998 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Secondblog // My New Hugo Site</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.55.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://lovzgump.github.io/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Secondblog"/>
+<meta name="twitter:description" content="Longset Substring Without Repeating Characters  A sliding window is an abstract concept commonly used in array/string problems.
+Approach 1 Brute Force public class Solution { public int lengthOfLongestSubstring(String s) { int n = s.length(); int ans = 0; for (int i = 0; i &lt; n; i&#43;&#43;) for (int j = i &#43; 1; j &lt;= n; j&#43;&#43;) if (allUnique(s, i, j)) ans = Math.max(ans, j - i); return ans; } public boolean allUnique(String s, int start, int end) { Set&lt;Character&gt; set = new HashSet&lt;&gt;(); for (int i = start; i &lt; end; i&#43;&#43;) { Character ch = s."/>
+
+    <meta property="og:title" content="Secondblog" />
+<meta property="og:description" content="Longset Substring Without Repeating Characters  A sliding window is an abstract concept commonly used in array/string problems.
+Approach 1 Brute Force public class Solution { public int lengthOfLongestSubstring(String s) { int n = s.length(); int ans = 0; for (int i = 0; i &lt; n; i&#43;&#43;) for (int j = i &#43; 1; j &lt;= n; j&#43;&#43;) if (allUnique(s, i, j)) ans = Math.max(ans, j - i); return ans; } public boolean allUnique(String s, int start, int end) { Set&lt;Character&gt; set = new HashSet&lt;&gt;(); for (int i = start; i &lt; end; i&#43;&#43;) { Character ch = s." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lovzgump.github.io/post/secondblog/" />
+<meta property="article:published_time" content="2019-07-01T14:20:30&#43;08:00"/>
+<meta property="article:modified_time" content="2019-07-01T14:20:30&#43;08:00"/>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://lovzgump.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="John Doe" /></a>
+      <h1>My New Hugo Site</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p>
+      <div class="app-header-social">
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Secondblog</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 1, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          17 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      
+
+<h2 id="longset-substring-without-repeating-characters">Longset Substring Without Repeating Characters</h2>
+
+<ul>
+<li><p>A sliding window is an abstract concept commonly used in array/string problems.</p>
+
+<h3 id="approach-1-brute-force">Approach 1 Brute Force</h3>
+
+<pre><code class="language-java">public class Solution {
+public int lengthOfLongestSubstring(String s) {
+    int n = s.length();
+    int ans = 0;
+    for (int i = 0; i &lt; n; i++)
+        for (int j = i + 1; j &lt;= n; j++)
+            if (allUnique(s, i, j)) ans = Math.max(ans, j - i);
+    return ans;
+}
+public boolean allUnique(String s, int start, int end) {
+    Set&lt;Character&gt; set = new HashSet&lt;&gt;();
+    for (int i = start; i &lt; end; i++) {
+        Character ch = s.charAt(i);
+        if (set.contains(ch)) return false;
+        set.add(ch);
+    }
+    return true;
+}
+}
+</code></pre>
+
+<h3 id="approach-2-slide-window">Approach 2 Slide Window</h3>
+
+<pre><code class="language-java">public class Solution {
+public int lengthOfLongestSubstring(String s) {
+    int n = s.length();
+    Set&lt;Character&gt; set = new HashSet&lt;&gt;();
+    int ans = 0, i = 0, j = 0;
+    while (i &lt; n &amp;&amp; j &lt; n) {
+        // try to extend the range [i, j]
+        if (!set.contains(s.charAt(j))){
+            set.add(s.charAt(j++));
+            ans = Math.max(ans, j - i);
+        }
+        else {
+            set.remove(s.charAt(i++));
+        }
+    }
+    return ans;
+}
+}
+</code></pre></li>
+
+<li><p>Time complexity : O(2n) = O(n). In the worst case each character will be visited twice by i and j.</p>
+
+<h3 id="approach-3-slide-window-optimized">Approach 3 Slide Window Optimized</h3>
+
+<pre><code class="language-java">public class Solution {
+public int lengthOfLongestSubstring(String s) {
+    int n = s.length(), ans = 0;
+    Map&lt;Character, Integer&gt; map = new HashMap&lt;&gt;(); // current index of character
+    // try to extend the range [i, j]
+    for (int j = 0, i = 0; j &lt; n; j++) {
+        if (map.containsKey(s.charAt(j))) {
+            i = Math.max(map.get(s.charAt(j)), i);
+        }
+        ans = Math.max(ans, j - i + 1);
+        map.put(s.charAt(j), j + 1);
+    }
+    return ans;
+}
+}
+</code></pre>
+
+<ul>
+<li><p>Time complexity : O(n). Index j will iterate n times.</p>
+
+<h2 id="median-of-two-sorted-arrays">Median of Two Sorted Arrays</h2></li>
+
+<li><p>the median is used for: Dividing a set into two equal length subsets, that one subset is always greater than the other</p></li>
+
+<li><p>cut array A and B into two parts at a random position i and j respectively</p></li>
+
+<li><p>put left_A and left_B into one set, and put right_A and right_B into another set. Name them left_part and right_part</p></li>
+
+<li><p>if we can ensure:
+&gt; 1. len(left_part) = len(right_part)
+&gt; 2. max(left_part) &lt;= min(right_part)</p></li>
+
+<li><p>then we can get
+&gt; $ madian = { max(left_part) + min(right_part) \over 2} $</p></li>
+
+<li><p>To ensure these two conditions, we just need to ensure:
+&gt; 1. i+j = m-i+n-j(or: m-i+n-j+1) if n &gt;= m, we just need to set: i = 0~m , $ j = {m+n+1 \over 2} - i $
+&gt; 2. B[ j -1 ] &lt;= A[ i ] and A[ i -1 ] &lt;= B[ j ]</p></li>
+
+<li><p>Why n &gt;= m? To make sure j is non-negative since 0 0 &lt;= i &lt;= m. So, all need to do is:
+&gt; Searching i in [ 0, m ], to find a object i such that: B[ j - 1 ] &lt;= A[ i ] and A[ i - 1 ] &lt;= B[ j ]</p></li>
+
+<li><p>We can do a binary search to find the object i ,and the median is:
+&gt; max( A[ i-1 ], B[ j-1 ] ), when m+n is odd
+&gt; $ { max(A[ i-1 ], Bmax[ j-1 ]) + min(A[ i ], B[ j ]) \over 2} $, when m+n is even</p></li>
+
+<li><p>And in a searching loop, we will encounter only three situations:
+&gt; 1. (j = 0 or i = m or B[ j-1 ] &lt;= A[ i ]) and ( i = 0 or j = n or A[ i-1 ] &lt;= B[ j ]), means i is perfect
+&gt; 2. i &lt; m and B[ j-1 ] &gt; A[ i ], means i is too small
+&gt; 3. i &gt; 0 and A[ i-1 ] &gt; B[ j ], means i is too big</p>
+
+<h2 id="longest-common-substring">Longest Common Substring</h2></li>
+
+<li><p>用动态规划思想，用一个矩阵来记录两个字符串中所有位置的两个字符之间的匹配情况，若是匹配则为1，否则为0。然后求出对角线最长的1序列，其对应的位置就是最长匹配子串的位置</p>
+
+<pre><code class="language-java">public class LongestSubstring {
+public int findLongest(String A, int n, String B, int m) {
+if(n == 0 || m == 0){
+    return 0;
+}
+//初始化状态矩阵
+int[][] matrix = new int[n][m];
+for(int i = 0; i &lt; n; i++){
+    for(int j = 0; j &lt; m; j++){
+        matrix[i][j] = 0;
+    }
+}
+int max = 0;
+for(int i = 0; i &lt; n; i++){
+    for(int j = 0; j &lt; m; j++){
+        if(A.charAt(i) == B.charAt(j)){
+            if(i == 0 || j == 0){
+                matrix[i][j] = 1;
+            }else{
+                matrix[i][j] = matrix[i-1][j-1] + 1;
+            }
+            max = (max &gt; matrix[i][j] ? max : matrix[i][j]);
+        }
+    }
+}
+return max;
+}
+}
+</code></pre>
+
+<h2 id="longest-common-subsequence">Longest Common Subsequence</h2>
+
+<p><a href="https://wenku.baidu.com/view/4b534527f524ccbff12184c9.html">PPT</a>
+<a href="https://blog.csdn.net/zmj1582188592/article/details/52249294">LCS算法讲解</a></p>
+
+<h2 id="longest-palindromic-回文-substring">Longest Palindromic(回文) Substring</h2>
+
+<h3 id="approach-1-自己写的方法">Approach #1:自己写的方法</h3>
+
+<pre><code class="language-java">public String longestPalindrome(String s) {
+char[] arr = s.toCharArray();
+int len = s.length();
+int maxLength = 0;
+String l = &quot;&quot;;
+for(int i = 0; i &lt; len; i++){
+    if(len&gt;=2 &amp;&amp; i+1 &lt;len &amp;&amp; arr[i] == arr[i+1]){
+        if(maxLength &lt; 2){
+            maxLength = 2;
+            l = s.substring(i, i+2);
+        }                  
+        int m = i-1;
+        int n = i+2;
+        while(m &gt;= 0 &amp;&amp; n &lt;= len-1){
+            if(arr[m] == arr[n]){
+                if(maxLength&lt;(n-m+1)){
+                    maxLength = (n-m+1);
+                    l = s.substring(m, n+1);
+                }
+                m--;
+                n++;
+            }else{
+                break;
+            }
+        }
+    }
+}
+for(int i = 0; i &lt; len; i++){
+    int m = i;
+    int n = i;
+    while(m &gt;= 0 &amp;&amp; n &lt;= len-1){
+        if(arr[m] == arr[n]){
+            if(maxLength&lt;(n-m+1)){
+                maxLength = (n-m+1);
+                l = &quot;&quot;;
+                for(int j = m; j&lt;= n; j++){
+                    l += arr[j];
+                }
+            }
+            m--;
+            n++;
+        }else{
+            break;
+        }
+    }
+}      
+return l;
+}
+</code></pre>
+
+<h3 id="approach-2-expand-around-center">Approach #2 (Expand Around Center)</h3></li>
+
+<li><p>We observe that a palindrome mirrors around its center. Therefore, a palindrome can be expanded from its center, and there are only 2n - 1 such centers.The reason is the center of a palindrome can be in between two letters.</p>
+
+<pre><code class="language-java">public String longestPalindrome(String s) {
+int start = 0, end = 0;
+for (int i = 0; i &lt; s.length(); i++) {
+int len1 = expandAroundCenter(s, i, i);
+int len2 = expandAroundCenter(s, i, i + 1);
+int len = Math.max(len1, len2);
+if (len &gt; end - start) {
+    start = i - (len - 1) / 2;
+    end = i + len / 2;
+}
+}
+return s.substring(start, end + 1);
+}
+private int expandAroundCenter(String s, int left, int right) {
+int L = left, R = right;
+while (L &gt;= 0 &amp;&amp; R &lt; s.length() &amp;&amp; s.charAt(L) == s.charAt(R)) {
+L--;
+R++;
+}
+return R - L - 1;
+}
+</code></pre>
+
+<h3 id="manacher-算法">Manacher 算法</h3>
+
+<p><a href="https://www.cnblogs.com/z360/p/6375514.html">Manacher1</a>
+<a href="https://segmentfault.com/a/1190000008484167">Manacher2</a></p>
+
+<h2 id="reverse-integer">Reverse Integer</h2></li>
+</ul></li>
+
+<li><p>Given a 32-bit signed integer, reverse digits of an integer.</p></li>
+
+<li><p>solution:</p>
+
+<pre><code class="language-java">int result = 0;
+while (x != 0)
+{
+    int tail = x % 10;
+    int newResult = result * 10 + tail;
+    if ((newResult - tail) / 10 != result)
+    { return 0; }                // 判断x是否越界
+    result = newResult;
+    x = x / 10;
+}
+return result;
+</code></pre>
+
+<h2 id="container-with-most-water">Container With Most Water</h2>
+
+<h3 id="bruce-method">Bruce method</h3>
+
+<pre><code class="language-java">public int maxArea(int[] height) {
+    //超时
+    int numOfPoint = height.length;
+    int max = 0;
+    for(int i = 0; i &lt; numOfPoint - 1; i++){
+        for(int j = i+1; j &lt; numOfPoint; j++){
+            int square = 0;
+            if(height[i] &gt; height[j])
+                square = height[j]*(j-i);
+            else
+                square = height[i]*(j-i);
+            max = max &gt; square?max:square;
+        }
+    }
+    return max;
+}
+</code></pre>
+
+<h3 id="improved-method">Improved method</h3>
+
+<p><img src="https://leetcode.com/media/original_images/11_Container_Water.gif" alt=" " /></p></li>
+
+<li><p>以序列最外面两条边形成的面基为起始面积，找出两条边中较小的一条，索引加一（i++），原因是找出一条更大的边来代替较小的边，以使得整个容器最大。</p>
+
+<pre><code class="language-java">public class Solution {
+public int maxArea(int[] height) {
+    int maxArea = 0, left = 0;
+    int right = height.length - 1;
+        
+    while (left &lt; right) {
+        maxArea = Math.max(maxArea, Math.min(height[left], height[right]) * (right - left));//求两点之间的面积
+        if (height[left] &lt; height[right]) {
+            left ++;
+        } else {
+            right--;
+        }
+    }
+    return maxArea;
+}
+}
+</code></pre>
+
+<h2 id="longest-common-prefix">Longest Common Prefix</h2>
+
+<h3 id="approach1-horizontal-scanning">Approach1 Horizontal scanning</h3>
+
+<p><img src="https://leetcode.com/media/original_images/14_basic.png" alt=" " />
+- LCP(S1 …S n )=LCP(LCP(LCP(S1, S2), S3),…Sn)</p>
+
+<pre><code class="language-java">public String longestCommonPrefix(String[] strs) {
+if (strs.length == 0) return &quot;&quot;;
+String prefix = strs[0];
+for (int i = 1; i &lt; strs.length; i++)
+    while (strs[i].indexOf(prefix) != 0) {
+        prefix = prefix.substring(0, prefix.length() - 1);
+        if (prefix.isEmpty()) return &quot;&quot;;
+    }        
+return prefix;
+}
+</code></pre>
+
+<h3 id="approach2-vertical-scanning">Approach2 Vertical scanning</h3>
+
+<h4 id="自己写的-一堆垃圾代码-用的是stringbuffer-较大的空间开销">自己写的(一堆垃圾代码，用的是StringBuffer，较大的空间开销）</h4>
+
+<pre><code class="language-java">public String longestCommonPrefix(String[] strs) {
+    int n = strs.length;
+    String LCPrefix = &quot;&quot;;
+    if(n == 0){
+        return LCPrefix;
+    }
+    if(n == 1){
+        return strs[0];
+    }
+    StringBuffer[] sb = new StringBuffer[n];
+    for(int i = 0; i &lt; n; i++){
+        sb[i] = new StringBuffer(strs[i]);
+        if(sb[i].toString().isEmpty())
+            return LCPrefix;
+    }
+    int index = 0;
+    while(true){
+        if(index &gt;= sb[0].length()){
+            return LCPrefix;
+        }
+        char c = sb[0].charAt(index);
+        if(c == '\0')
+            return LCPrefix;
+        for(int i = 1; i &lt; n; i++){
+            if(index &gt;= sb[i].length()){
+                return LCPrefix;
+            }
+            char s = sb[i].charAt(index);
+            if(s != c)
+                return LCPrefix;
+        }
+        LCPrefix += c;
+        index++;
+    }
+}
+</code></pre>
+
+<h4 id="改进后的">改进后的</h4>
+
+<pre><code class="language-java">public String longestCommonPrefix(String[] strs) {
+if (strs == null || strs.length == 0) return &quot;&quot;;
+for (int i = 0; i &lt; strs[0].length() ; i++){
+    char c = strs[0].charAt(i);
+    for (int j = 1; j &lt; strs.length; j ++) {
+        if (i == strs[j].length() || strs[j].charAt(i) != c)
+            return strs[0].substring(0, i);
+    }
+}
+return strs[0];
+}
+</code></pre>
+
+<h3 id="approach3-divide-and-conquer">Approach3 Divide and Conquer</h3>
+
+<p><img src="https://leetcode.com/media/original_images/14_lcp_diviso_et_lmpera.png" alt=" " /></p></li>
+
+<li><p>LCP(S1&hellip;Sn) = LCP(LCP(S1&hellip;Sk), LCP(Sk+1&hellip;Sn))</p></li>
+
+<li><p>递归思想 (recursive calls)
+``` java
+public String longestCommonPrefix(String[] strs) {
+if (strs == null || strs.length == 0) return &ldquo;&rdquo;;
+    return longestCommonPrefix(strs, 0 , strs.length - 1);
+}</p></li>
+</ul>
+
+<p>private String longestCommonPrefix(String[] strs, int l, int r) {
+    if (l == r) {
+        return strs[l];
+    }
+    else {
+        int mid = (l + r)/2;
+        String lcpLeft =   longestCommonPrefix(strs, l , mid);
+        String lcpRight =  longestCommonPrefix(strs, mid + 1,r);
+        return commonPrefix(lcpLeft, lcpRight);
+   }
+}</p>
+
+<p>String commonPrefix(String left,String right) {
+    int min = Math.min(left.length(), right.length());
+    for (int i = 0; i &lt; min; i++) {
+        if ( left.charAt(i) != right.charAt(i) )
+            return left.substring(0, i);
+    }
+    return left.substring(0, min);
+}</p>
+
+<pre><code>### Approach4 Binary search
+![ ] (https://leetcode.com/media/original_images/14_lcp_binary_search.png)
+-  Each time search space is divided in two equal parts, one of them is discarded, because it is sure that it doesn't contain the solution.
+- There are two posssible cases:
+    1. ` S[1...mid] `is not a common string. This means that for each ` j &gt; i s[1...j] `is not a common string 
+and we discard the second half of the search space.
+    2. ` S[1...mid] `is a common string. This means that for each ` i &lt; j s[1...i] `is  a common string 
+and we discard the first half of the search space, because we try to find longer common prefix.
+``` java
+public String longestCommonPrefix(String[] strs) {
+    if (strs == null || strs.length == 0)
+        return &quot;&quot;;
+    int minLen = Integer.MAX_VALUE;
+    for (String str : strs)
+        minLen = Math.min(minLen, str.length());
+    int low = 1;
+    int high = minLen;
+    while (low &lt;= high) {
+        int middle = (low + high) / 2;
+        if (isCommonPrefix(strs, middle))
+            low = middle + 1;
+        else
+            high = middle - 1;
+    }
+    return strs[0].substring(0, (low + high) / 2);
+}
+private boolean isCommonPrefix(String[] strs, int len){
+    String str1 = strs[0].substring(0,len);
+    for (int i = 1; i &lt; strs.length; i++)
+        if (!strs[i].startsWith(str1))
+            return false;
+    return true;
+}
+</code></pre>
+
+<h3 id="further-thoughts">Further Thoughts</h3>
+
+<ul>
+<li>a slightly different problem: <code>Given a set of keys S = [S1,S2…Sn][S1,S2…Sn], find the longest common prefix among a string q and S. This LCP query will be called frequently.</code></li>
+
+<li><p><a href="https://leetcode.com/articles/implement-trie-prefix-tree/">Trie树</a> :根结点不包含字符，除根结点外每一个节点都只包含一个字符； 从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串； 每个节点的所有子节点包含的字符都不相同
+<img src="https://leetcode.com/media/original_images/208_Node.png" alt=" " /></p>
+
+<h2 id="remove-nth-node-from-end-of-list">Remove Nth Node from End of List</h2>
+
+<h3 id="approach-1-two-pass-algorithm">Approach #1 (Two pass algorithm)</h3></li>
+
+<li><p>The problem can be simply reduced to another one: Remove the (L-n+1)th Node from the beginning pf the List, once we get the length of list L</p></li>
+
+<li><p>We can add an auxiliary &ldquo;dummy&rdquo; node, which points to the head, for simplifying some corner cases such as a list with only one node or removing the head of the list.</p></li>
+
+<li><p>自己写的垃圾代码（太多分支判断）</p>
+
+<pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+    int count = 1;
+    ListNode temp = head;
+    while (temp.next != null) {
+        count++;
+        temp = temp.next;
+    }
+    temp = head;
+    if(count == 1){
+        return null;
+    }else if(count == 2 &amp;&amp; n == 1){
+        head.next = null;
+    }else if(count == n){
+        head = head.next;
+    }else{
+        int i = count - n;
+        while(i &gt; 1) {
+            temp = temp.next;
+            i--;
+        }
+        if(n == 1){
+            temp.next= null;
+        }else{
+            temp.next = temp.next.next;
+        }
+    }
+    return head;
+}
+</code></pre>
+
+<ul>
+<li>improved code (user dummy node)
+<code>java
+public ListNode removeNthFromEnd(ListNode head, int n) {
+ListNode dummy = new ListNode(0);
+dummy.next = head;
+int length = 0;
+ListNode first = head;
+while (first != null) {
+length++;
+first = first.next;
+}
+length -= n;
+first = dummy;
+while (length &gt; 0) {
+length--;
+first = first.next;
+}
+first.next = first.next.next;
+return dummy.next;
+}
+</code>
+### Aproach #2 (One pass algothrim)</li>
+</ul></li>
+
+<li><p>Use two pointer. The first pointer advances the list by n+1 steps, while the second pointer starts from the beginning of the list. Then there is a constant gap between the two pointers. When the first pointer arrives past the last nodes, the second will be pointing the nth node counting from the last node.
+<img src="https://leetcode.com/media/original_images/19_Remove_nth_node_from_end_of_listB.png" alt=" " /></p>
+
+<pre><code class="language-java">public ListNode removeNthFromEnd(ListNode head, int n) {
+ListNode dummy = new ListNode(0);
+dummy.next = head;
+ListNode first = dummy;
+ListNode second = dummy;
+// Advances first pointer so that the gap between first and second is n nodes apart
+for (int i = 1; i &lt;= n + 1; i++) {
+    first = first.next;
+}
+// Move first to the end, maintaining the gap
+while (first != null) {
+    first = first.next;
+    second = second.next;
+}
+second.next = second.next.next;
+return dummy.next;
+}
+</code></pre>
+
+<h2 id="valid-parentheses">Valid Parentheses</h2>
+
+<ul>
+<li>Use stack to match
+<code>java
+public boolean isValid(String s) {
+char[] arr = s.toCharArray();
+Stack&lt;Character&gt; stack = new Stack();
+int i = 0;
+for(; i &lt; arr.length; i++){
+    switch (arr[i]) {
+        case '(':
+        case '[':
+        case '{':
+            stack.push(arr[i]);
+            break;
+        case ')':
+            if(!stack.isEmpty() &amp;&amp; '(' == stack.pop())
+                break;
+            return false;
+        case ']':
+            if(!stack.isEmpty() &amp;&amp; '[' == stack.pop())
+                break;
+            return false;
+        case '}':
+            if(!stack.isEmpty() &amp;&amp; '{' == stack.pop())
+                break;
+            return false;
+        default:
+            break;
+    }
+}
+if(stack.isEmpty())
+    return true;
+return false;
+}
+</code>
+## Merge Two Sorted Lists</li>
+</ul></li>
+
+<li><p><code>Recursion</code></p>
+
+<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2){
+if(l1 == null) return l2;
+if(l2 == null) return l1;
+if(l1.val &lt; l2.val){
+l1.next = mergeTwoLists(l1.next, l2);
+return l1;
+} else{
+l2.next = mergeTwoLists(l1, l2.next);
+return l2;
+}
+}
+</code></pre>
+
+<h3 id="using-space-to-exchange-time">Using space to exchange time</h3>
+
+<pre><code class="language-java">public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    ListNode dummy1 = l1;
+    ListNode dummy2 = l2;
+        
+    ListNode dummy = new ListNode(0);
+    ListNode link = dummy;
+        
+    while(dummy1 != null &amp;&amp; dummy2 != null) {
+        if (dummy1.val &lt;= dummy2.val) {
+            link.next = dummy1;
+            link = link.next;
+            dummy1 = dummy1.next;
+        }else {
+            link.next = dummy2;
+            link = link.next;
+            dummy2 = dummy2.next;
+        }
+    }
+        
+    if(dummy2 == null){
+        link.next = dummy1;
+    }else {
+        link.next = dummy2;
+    }
+        
+    return dummy.next;
+}
+</code></pre></li>
+</ul>
+
+<h2 id="generate-parentheses">Generate Parentheses</h2>
+
+<ul>
+<li>Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.</li>
+
+<li><p>For example, give n=3, a solution set is:
+&gt; [
+ &ldquo;((()))&rdquo;,
+ &ldquo;(()())&rdquo;,
+ &ldquo;(())()&rdquo;,
+ &ldquo;()(())&rdquo;,
+ &ldquo;()()()&rdquo;
+&gt; ]</p>
+
+<h3 id="approach-1-brute-force-1">Approach #1: Brute Force</h3></li>
+
+<li><p>Generate all $ 2^{2n} $ sequences of <code>(</code> and <code>)</code> characters. Then, check if each node is valid.</p>
+
+<pre><code class="language-java">class Solution {
+public List&lt;String&gt; generateParenthesis(int n) {
+    List&lt;String&gt; combinations = new ArrayList();
+    generateAll(new char[2 * n], 0, combinations);
+    return combinations;
+}
+public void generateAll(char[] current, int pos, List&lt;String&gt; result) {
+    if (pos == current.length) {
+        if (valid(current))
+            result.add(new String(current));
+    } else {
+        current[pos] = '(';
+        generateAll(current, pos+1, result);
+        current[pos] = ')';
+        generateAll(current, pos+1, result);
+    }
+}
+public boolean valid(char[] current) {
+    int balance = 0;
+    for (char c: current) {
+        if (c == '(') balance++;
+        else balance--;
+        if (balance &lt; 0) return false;
+    }
+    return (balance == 0);
+}
+}
+</code></pre>
+
+<h2 id="approach-2-backtracing">Approach #2 BackTracing</h2>
+
+<ul>
+<li>Only add the <code>(</code> or <code>)</code> when we know it will remain a valid sequence.</li>
+<li>we can start an opening bracket if we still have one ( of <code>n</code> ) left to left. And we can start a closing bracket if it would not exceed the number of openig brackets.
+<code>java
+class Solution {
+public List&lt;String&gt; generateParenthesis(int n) {
+List&lt;String&gt; ans = new ArrayList();
+backtrack(ans, &quot;&quot;, 0, 0, n);
+return ans;
+}
+public void backtrack(List&lt;String&gt; ans, String cur, int open, int close, int max){
+if (str.length() == max * 2) {
+    ans.add(cur);
+    return;
+}
+if (open &lt; max)
+    backtrack(ans, cur+&quot;(&quot;, open+1, close, max);
+if (close &lt; open)
+    backtrack(ans, cur+&quot;)&quot;, open, close+1, max);
+}
+}
+</code>
+## Closure Number</li>
+</ul></li>
+
+<li><p>For each closure number <code>c</code>, we know the starting and ending brackets must be at index <code>0</code> and  <code>2*c + 1</code>. Then, the <code>2*c</code> elements between must be a valid sequence, plus the rest of the elements must be a valid sequence.</p>
+
+<pre><code class="language-java">class Solution {
+public List&lt;String&gt; generateParenthesis(int n) {
+    List&lt;String&gt; ans = new ArrayList();
+    if (n == 0) {
+        ans.add(&quot;&quot;);
+    } else {
+        for (int c = 0; c &lt; n; ++c)
+            for (String left: generateParenthesis(c))
+                for (String right: generateParenthesis(n-1-c))
+                    ans.add(&quot;(&quot; + left + &quot;)&quot; + right);
+    }
+    return ans;
+}
+}
+</code></pre>
+
+<h2 id="merge-k-sorted-lists">Merge k Sorted lists</h2>
+
+<h3 id="approach-1-merge-lists-one-by-one">Approach #1 Merge lists one by one</h3>
+
+<ul>
+<li><p>Convert merge k lists problem to merge 2 lists (k -1) times.
+``` java
+class Solution {
+public ListNode mergeKLists(ListNode[] lists) {
+if(lists.length == 0)
+    return null;
+if(lists.length == 1)
+    return lists[0];</p>
+
+<p>ListNode ans = lists[0];
+for(int i = 1; i &lt; lists.length; i++) {
+    ans = mergeTwo(ans, lists[i]);
+}
+return ans;
+}</p></li>
+</ul>
+
+<p>// 如果采用迭代的方法会超时
+public ListNode mergeTwo(ListNode l1, ListNode l2) {
+    ListNode point = new ListNode(0);
+    ListNode header = point;
+    while(l1 !=null &amp;&amp; l2 != null) {
+        if(l1.val &lt; l2.val){
+            point.next = l1;
+            l1 = l1.next;
+        }else {
+            point.next = l2;
+            l2 = l1;
+            l1 = point.next.next;
+        }
+        point = point.next;
+    }
+    if(l1 == null)
+        point.next = l2;
+    else
+        point.next = l1;
+    return header.next;
+}
+}
+```</p></li>
+</ul>
+
+<h3 id="approach-2-merge-with-divide-and-conquer">Approach #2 Merge with Divide and Conquer</h3>
+
+<ul>
+<li>Pick up k lists and merge each pair</li>
+<li>After the first pairing, k lists are merged into k/2 lists with avarge 2N/k length, then k/4, k/8 and so on.</li>
+
+<li><p>Repeat this procedure until we get the final sorted linked list.
+<img src="https://leetcode.com/problems/merge-k-sorted-lists/Figures/23/23_divide_and_conquer_new.png" alt=" " /></p>
+
+<pre><code class="language-java">class Solution {
+public ListNode mergeKLists(ListNode[] lists) {
+    if(lists.length == 0)
+        return null;
+    if(lists.length == 1)
+        return lists[0];
+        
+    //ListNode ans = lists[0];
+    int internal = 1;
+    while(internal &lt; lists.length){
+        for (int i = 0; i &lt; lists.length - internal; i += internal*2) {
+            lists[i] = mergeTwoLists(lists[i], lists[i+internal]);
+        }
+        internal *= 2;
+    }
+        
+    return lists[0];
+}
+    
+public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    if (l1 == null)
+        return l2;
+    if (l2 == null)
+        return l1;
+        
+    if (l1.val &lt; l2.val){
+        l1.next = mergeTwoLists(l1.next, l2);
+        return l1;
+    }else {
+        l2.next = mergeTwoLists(l1, l2.next);
+        return l2;
+    }
+             
+}
+}
+</code></pre>
+
+<h3 id="aproach-3-compare-one-by-one">Aproach #3 Compare one by one</h3>
+
+<ul>
+<li>Compare every k nodes (head of every linked list) and get the node with smallest value</li>
+<li>Extend the final sorted linked list with the selected nodes</li>
+</ul>
+
+<h2 id="remove-duplicates-from-sorted-array">Remove Duplicates from Sorted Array</h2>
+
+<h3 id="approach-1">Approach 1</h3>
+
+<ul>
+<li>If we found a repeated number, we put it to the tail of the array. But the execuating time is long;
+``` java
+class Solution {
+public int removeDuplicates(int[] nums) {
+int len = nums.length;
+int i = 0;
+int j = 0;
+while(i+1 &lt; nums.length &amp;&amp; nums[i] &lt;= nums[i+1]){
+    if( j == nums.length -1){
+        break;
+    }
+    if(nums[i] == nums[i+1]){
+        moveToTail(nums, i+1);
+        j++;
+        len&ndash;;
+    }else{
+        j++;
+        i++;
+    }
+}
+return len;
+}
+<br /></li>
+</ul>
+
+<p>public void moveToTail(int[] nums, int p){
+    int temp = nums[p];
+    while(p+1 &lt; nums.length){
+        nums[p] = nums[p+1];
+        p++;
+    }
+    nums[p] = temp;
+}
+}
+```</p></li>
+</ul>
+
+<h3 id="approach-2">Approach 2</h3>
+
+<ul>
+<li>Since the array is already sorted, we can keep two pointers ii and jj, where ii is the slow-runner while jj is the fast-runner. As long as nums[i] = nums[j]nums[i]=nums[j], we increment jj to skip the duplicate.</li>
+
+<li><p>When we encounter nums[j] \neq nums[i]nums[j]≠nums[i], the duplicate run has ended so we must copy its value to nums[i + 1]nums[i+1]. ii is then incremented and we repeat the same process again until jj reaches the end of array.</p>
+
+<pre><code class="language-java">public int removeDuplicates(int[] nums) {
+int i = nums.length &gt; 0 ? 1 : 0;
+for (int n : nums)
+    if (n &gt; nums[i-1])
+        nums[i++] = n;
+return i;
+}
+</code></pre>
+
+<h2 id="next-permutation">Next Permutation</h2>
+
+<ul>
+<li><p>Find the next lexicographic permutation of the given list of numbers than the number formed by the given array</p>
+
+<h3 id="approach-1-brute-force-2">Approach #1 Brute Force</h3></li>
+
+<li><p>Find out every possible permutation of listed formed by the given array and find out the permutation which is just larger than the given one. But this approach will be time exceeded.</p>
+
+<h3 id="approach-2-single-pass-approach">Approach #2 Single Pass Approach</h3></li>
+
+<li><p>We need to find the first pair of two successive numbers a[i] and a[i-1], from the right, which satisfy a[i] &gt; a[i-1]. Now, rearrange the numbers to the right of a[i-1] including itself can get a larger permutation.</p></li>
+
+<li><p>We need to replace the number a[i-1] with the number which is just larger than itself among the numbers lying to its right section, say a[j].
+<img src="https://leetcode.com/media/original_images/31_nums_graph.png" alt=" " /></p></li>
+
+<li><p>Swap the numbers a[i-1] and a[j]. But the current permutation isn&rsquo;t the permutation that we are looking for. Therefore, we need to place those numbers in ascending order to get their smallest permutation.</p></li>
+
+<li><p>But, recall that while scanning the numbers from the right, we can simply discovery the right numbers of a[i] was in descending order. We just need to reverse the numbers following a[i-1] to get the smallest lexicographic permutation.
+<img src="https://leetcode.com/media/original_images/31_Next_Permutation.gif" alt=" " />
+``` java
+class Solution {
+public void nextPermutation(int[] nums) {
+int len = nums.length;
+int i = len-2;
+while(i &gt;= 0 &amp;&amp; nums[i+1] &lt;= nums[i]){
+    i&ndash;;
+}
+if(i &gt;= 0 ){
+    int j = len - 1;
+    while(nums[j] &lt;= nums[i] &amp;&amp; j &gt;= 0){
+        j&ndash;;
+    }
+    swap(nums, i, j);<br />
+}
+reverse(nums, i+1);
+}</p></li>
+</ul>
+
+<p>public void reverse(int[] nums, int s){
+    int j = nums.length - 1;
+    while(s &lt; j){
+     swap(nums, s, j);
+     s++;
+     j&ndash;;
+    }
+}
+public void swap(int nums[], int i, int j){
+    int temp = nums[i];
+    nums[i] = nums[j];
+    nums[j] = temp;
+}
+}
+```</p></li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

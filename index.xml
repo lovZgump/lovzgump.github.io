@@ -6,10 +6,20 @@
     <description>Recent content on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jul 2019 12:46:22 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jul 2019 14:20:30 +0800</lastBuildDate>
     
 	<atom:link href="https://lovzgump.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Secondblog</title>
+      <link>https://lovzgump.github.io/post/secondblog/</link>
+      <pubDate>Mon, 01 Jul 2019 14:20:30 +0800</pubDate>
+      
+      <guid>https://lovzgump.github.io/post/secondblog/</guid>
+      <description>Longset Substring Without Repeating Characters  A sliding window is an abstract concept commonly used in array/string problems.
+Approach 1 Brute Force public class Solution { public int lengthOfLongestSubstring(String s) { int n = s.length(); int ans = 0; for (int i = 0; i &amp;lt; n; i++) for (int j = i + 1; j &amp;lt;= n; j++) if (allUnique(s, i, j)) ans = Math.max(ans, j - i); return ans; } public boolean allUnique(String s, int start, int end) { Set&amp;lt;Character&amp;gt; set = new HashSet&amp;lt;&amp;gt;(); for (int i = start; i &amp;lt; end; i++) { Character ch = s.</description>
+    </item>
     
     <item>
       <title>Firstblog</title>
