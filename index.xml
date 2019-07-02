@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>博客</title>
-    <link>http://lovzgump.github.io/</link>
+    <link>https://lovzgump.github.io/</link>
     <description>Recent content on 博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>utf-8</language>
     <lastBuildDate>Tue, 02 Jul 2019 10:13:18 +0800</lastBuildDate>
     
-	<atom:link href="http://lovzgump.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://lovzgump.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>FirstBlog</title>
-      <link>http://lovzgump.github.io/post/blog/</link>
+      <link>https://lovzgump.github.io/post/blog/</link>
       <pubDate>Tue, 02 Jul 2019 10:13:18 +0800</pubDate>
       
-      <guid>http://lovzgump.github.io/post/blog/</guid>
+      <guid>https://lovzgump.github.io/post/blog/</guid>
       <description> 事务  事务：单个逻辑工作单元执行的一系列操作 事务的属性：ACID
  Atomicity原子性：单个事务内的一系列操作，要么全都执行，要么都不执行 Consistency一致性：事务在完成时，必须使所有的数据都保持一致状态  一致性状态：数据库只包含成功事务提交的结果 不一致状态：数据库中包含失败事务的结果  Isolation隔离性：由并发事务所作的修改必须与任何其它并发事务所作的修改隔离，即每个事务都不会察觉到系统中其他事务在并发执行 Durability持久性：事务完成之后，它对于系统的影响是永久性的。该修改即使出现致命的系统故障也将一直保持
 并发控制  事务并发执行可能带来的问题，可能会存取和存储不正确的数据，破坏事务的隔离性和数据库的一致性
