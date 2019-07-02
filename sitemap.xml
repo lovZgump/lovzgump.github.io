@@ -3,29 +3,29 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://lovzgump.github.io/post/blog/</loc>
+    <loc>http://lovzgump.github.io/post/blog/</loc>
     <lastmod>2019-07-02T10:13:18+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://lovzgump.github.io/</loc>
-    <lastmod>2019-07-02T10:13:18+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://lovzgump.github.io/post/</loc>
+    <loc>http://lovzgump.github.io/post/</loc>
     <lastmod>2019-07-02T10:13:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://lovzgump.github.io/categories/</loc>
+    <loc>http://lovzgump.github.io/</loc>
+    <lastmod>2019-07-02T10:13:18+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://lovzgump.github.io/tags/</loc>
+    <loc>http://lovzgump.github.io/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lovzgump.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
